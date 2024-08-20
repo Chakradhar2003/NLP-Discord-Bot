@@ -1,7 +1,6 @@
 from pymongo import MongoClient
 
-mongo_client=MongoClient("mongodb+srv://cinaganti:wh98GCWQ3qyBqPWG@cluster0.t5luw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-
+mongo_client=MongoClient("")
 db = mongo_client['discord_db']
 collection = db['toxicity_levels']
 

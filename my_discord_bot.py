@@ -4,7 +4,7 @@ from discord import Member
 from discord.ext.commands import has_permissions,MissingPermissions
 import requests
 
-token = "MTI3NDgzMDcwNzg1OTkxOTAwOQ.G_gwxl.U4M9R3YCZwUau6lnJY8AqJIMD7zixXrKZZxdaY"
+token = "Your Token"
 bot=commands.Bot(command_prefix="!",intents=discord.Intents.all())
 threshold = 50
 
