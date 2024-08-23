@@ -9,6 +9,8 @@ import seaborn as sns
 
 # Importing essential libraries for performing NLP
 import nltk
+nltk.download('stopwords')
+nltk.download('wordnet')
 import re
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
@@ -109,31 +111,13 @@ y = df['label']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Fitting Naive Bayes to the Training set
-mnb = MultinomialNB()
-cv = cross_val_score(mnb, X, y, scoring='f1', cv=10)
-print('--- Average F1-Score for MNB model: {} ---'.format(round(cv.mean(), 3)))
-print('Standard Deviation: {}'.format(round(cv.std(), 3)))
 
-
-dt = DecisionTreeClassifier()
-cv = cross_val_score(dt, X, y, scoring='f1', cv=10)
-print('--- Average F1-Score for Decision Tree model: {} ---'.format(round(cv.mean(), 3)))
-print('Standard Deviation: {}'.format(round(cv.std(), 3)))
-
-rf = RandomForestClassifier(n_estimators=10)
-cv = cross_val_score(rf, X, y, scoring='f1', cv=10)
-print('--- Average F1-Score for Random Forest model: {} ---'.format(round(cv.mean(), 3)))
-print('Standard Deviation: {}'.format(round(cv.std(), 3)))
-
-# Classification report for Random Forest model
 rf = RandomForestClassifier(n_estimators=20)
 rf.fit(X_train, y_train)
 y_pred = rf.predict(X_test)
 
-print('--- Classification report for Random Forest model ---')
-print(classification_report(y_test, y_pred))
 
+    
 def predict_spam(sample_message):
     sample_message = re.sub(pattern='[^a-zA-Z]',repl=' ', string = sample_message)
     sample_message = sample_message.lower()
@@ -145,11 +129,14 @@ def predict_spam(sample_message):
     temp = tfidf.transform([final_message]).toarray()
     return rf.predict(temp)
 
+if __name__ == '__main__':
 
-# Prediction 1
-sample_message = input("Enter your meassage")
+    # Prediction 1
+    sample_message = input("Enter your meassage")
 
-if predict_spam(sample_message):
-    print('Gotcha! This is a SPAM message.')
-else:
-    print('This is a HAM (normal) message.')
+    if predict_spam(sample_message):
+        print('Gotcha! This is a SPAM message.')
+    else:
+        print('This is a HAM (normal) message.')
+
+
