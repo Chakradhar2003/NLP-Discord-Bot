@@ -30,7 +30,7 @@ if not sys.warnoptions:
 
 
 # Loading the dataset
-df = pd.read_csv('Spam_SMS_Collection.txt', sep='\t', names=['label', 'message'])
+df = pd.read_csv('./Spam_SMS_Collection.txt', sep='\t', names=['label', 'message'])
 
 df['label'] = df['label'].map({'ham': 0, 'spam': 1})
 

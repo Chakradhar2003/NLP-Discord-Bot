@@ -1,10 +1,11 @@
 import numpy as np
 import torch
-from src.model import LSTMToxicClassifier
+from toxic_comment_classifier.src.model import LSTMToxicClassifier  # Updated import path
+
 
 class Predictor:
     # Loading vocabulary
-    vocab = np.load('./vocabulary/vocabulary.npy', allow_pickle=True).item()
+    vocab = np.load('toxic_comment_classifier/vocabulary/vocabulary.npy', allow_pickle=True).item()
 
     # Model parameter
     MAX_tokens = len(vocab)
@@ -12,7 +13,7 @@ class Predictor:
 
     # Loading model
     model = LSTMToxicClassifier(MAX_tokens=MAX_tokens)
-    model.load_state_dict(torch.load('./model_ckpt/model_weights.pth', map_location=torch.device('cpu'), weights_only=True))
+    model.load_state_dict(torch.load('toxic_comment_classifier/model_ckpt/model_weights.pth', map_location=torch.device('cpu'), weights_only=True))
 
     # Labels to predict
     labels =  ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
